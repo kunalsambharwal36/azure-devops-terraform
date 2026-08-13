@@ -13,8 +13,9 @@ resource "azurerm_application_gateway" "main" {
   resource_group_name = var.resource_group_name
 
   sku {
-    name = "Basic"
-    tier = "Basic"
+    name     = "Basic"
+    tier     = "Basic"
+    capacity = 1
   }
 
   gateway_ip_configuration {
