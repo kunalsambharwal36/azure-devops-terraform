@@ -10,9 +10,6 @@ output "application_gateway_public_ip" {
   value = module.app_gateway.public_ip
 }
 
-output "load_balancer_public_ip" {
-  value = module.load_balancer.public_ip
-}
 
 output "nat_public_ip" {
   value = module.nat.nat_public_ip
