@@ -1,5 +1,5 @@
 output "resource_group" {
-  value = azurerm_resource_group.main.name
+  value = var.resource_group_name
 }
 
 output "vm_private_ips" {

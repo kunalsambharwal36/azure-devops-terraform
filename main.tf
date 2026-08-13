@@ -1,19 +1,15 @@
-resource "azurerm_resource_group" "main" {
-  name     = var.resource_group_name
-  location = var.location
-}
 
 module "networking" {
   source = "./modules/networking"
 
-  resource_group_name = azurerm_resource_group.main.name
+  resource_group_name = var.resource_group_name
   location            = var.location
 }
 
 module "security" {
   source = "./modules/security"
 
-  resource_group_name = azurerm_resource_group.main.name
+  resource_group_name = var.resource_group_name
   location            = var.location
   backend_subnet_id   = module.networking.backend_subnet_id
 }
@@ -21,7 +17,7 @@ module "security" {
 module "nat" {
   source = "./modules/nat"
 
-  resource_group_name = azurerm_resource_group.main.name
+  resource_group_name = var.resource_group_name
   location            = var.location
   backend_subnet_id   = module.networking.backend_subnet_id
 }
@@ -29,7 +25,7 @@ module "nat" {
 module "compute" {
   source = "./modules/compute"
 
-  resource_group_name = azurerm_resource_group.main.name
+  resource_group_name = var.resource_group_name
   location            = var.location
 
   backend_subnet_id = module.networking.backend_subnet_id
@@ -43,7 +39,7 @@ module "compute" {
 module "app_gateway" {
   source = "./modules/app_gateway"
 
-  resource_group_name = azurerm_resource_group.main.name
+  resource_group_name = var.resource_group_name
   location            = var.location
 
   app_gateway_subnet_id = module.networking.app_gateway_subnet_id
@@ -53,6 +49,6 @@ module "app_gateway" {
 module "storage" {
   source = "./modules/storage"
 
-  resource_group_name = azurerm_resource_group.main.name
+  resource_group_name = var.resource_group_name
   location            = var.location
 }
